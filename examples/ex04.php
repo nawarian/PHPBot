@@ -17,6 +17,9 @@ $dm->createCommandPipeline(
     $dm->pointer()->moveTo(300, 680),
     $dm->pointer()->releaseClick(MouseButtons::LEFT),
     $dm->keyboard()->releaseKey(Keys::CTRL)
-);
+)
+->then(function() {
+    echo 'done';
+});
 
 $loop->run();
