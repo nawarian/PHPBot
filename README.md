@@ -5,6 +5,17 @@ A PHP library for creating automation robots
 This project was made for fun, feel free
 to improve it :)
 
+# Getting Started: composer
+Under your project's folder type:
+`$ composer require nawarian/php-bot dev-master`
+
+```php
+<?php
+require_once 'vendor/autoload.php';
+```
+
+Then you are ready to go :D
+
 # Dependencies
 
 ## Linux

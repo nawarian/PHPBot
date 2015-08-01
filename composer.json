@@ -2,6 +2,7 @@
     "name": "nawarian/php-bot",
     "description": "A PHP library for creating automation robots",
     "license": "MIT",
+    "keywords": ["php", "bot", "automation", "desktop", "windows", "linux", "x11", "xlib"],
     "authors": [
         {
             "name": "Nawarian Níckolas",
