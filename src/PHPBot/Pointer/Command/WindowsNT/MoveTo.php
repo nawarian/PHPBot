@@ -10,7 +10,7 @@ class MoveTo extends Process
 {
     public function __construct(LoopInterface $loop, $x, $y)
     {
-        $command = "";
+        $command = PYAUTOGUI_BIN . "/mousemove.exe {$x} {$y}";
         parent::__construct($loop, $command);
     }
 }

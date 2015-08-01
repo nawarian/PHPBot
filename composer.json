@@ -15,6 +15,7 @@
     "autoload": {
         "psr-4": {
             "PHPBot\\": "src/PHPBot"
-        }
+        },
+        "files": ["ext/pyautogui/windows-wrapper.php"]
     }
 }
