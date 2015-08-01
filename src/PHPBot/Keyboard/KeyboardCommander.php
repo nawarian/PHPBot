@@ -10,12 +10,15 @@ use React\EventLoop\LoopInterface;
 class KeyboardCommander
 {
     protected $loop;
+    protected $commandFactory;
     protected $operatingSystem;
 
     public function __construct(LoopInterface $loop, OperatingSystem $os)
     {
         $this->loop = $loop;
         $this->operatingSystem = $os;
+
+        $this->commandFactory = new Command\Factory($this->loop);
     }
 
     protected function concatKeys(array $keys)
@@ -30,31 +33,39 @@ class KeyboardCommander
 
     public function sendKey($key)
     {
-        $command = "xdotool key {$key['linux']}";
-        return new Process($this->loop, $command);
+        return $this->sendKeys($key);
     }
 
     public function sendKeys()
     {
-        $command = "xdotool key {$this->concatKeys(func_get_args())}";
-        return new Process($this->loop, $command);
+        $keys = func_get_args();
+        return $this->commandFactory->sendkeys($keys, $this->operatingSystem);
     }
 
     public function type($text, $delay = 12)
     {
-        $command = "xdotool type --delay {$delay} {$text}";
-        return new Process($this->loop, $command);
+        return $this->commandFactory->type($text, $delay, $this->operatingSystem);
     }
 
     public function holdKey($key)
     {
-        $command = "xdotool keydown {$this->concatKeys(func_get_args())}";
-        return new Process($this->loop, $command);
+        return $this->holdKeys($key);
+    }
+
+    public function holdKeys()
+    {
+        $keys = func_get_args();
+        return $this->commandFactory->holdKeys($keys, $this->operatingSystem);
     }
 
     public function releaseKey($key)
     {
-        $command = "xdotool keyup {$this->concatKeys(func_get_args())}";
-        return new Process($this->loop, $command);
+        return $this->releaseKeys($key);
+    }
+
+    public function releaseKeys()
+    {
+        $keys = func_get_args();
+        return $this->commandFactory->releaseKeys($keys, $this->operatingSystem);
     }
 }
