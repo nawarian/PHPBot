@@ -7,6 +7,7 @@ to improve it :)
 
 # Dependencies
 
+## Linux
 PHPBot works directly with X11, using `xdotool` to
 send commands. Further versions could add support to
 other devices as well.
@@ -14,6 +15,14 @@ other devices as well.
 Make it independent from `xdotool` would also be nice,
 projects like `https://github.com/moriyoshi/php-Xlib` are
 a great shot! But still excludes MS Windows implementations...
+
+## Windows NT
+PHPBot now can work with Windows NT platforms too.
+Is important to notice that: it uses compiled python files that
+access the User32.dll API. Because of that, some antivirus software
+might mark the files under `ext/pyautogui/bin/dest` folder as threads.
+
+Also: the command pipeline funcionality has shown some bugs.
 
 # Samples
 
