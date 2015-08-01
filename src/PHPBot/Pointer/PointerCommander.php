@@ -3,38 +3,40 @@
 namespace PHPBot\Pointer;
 
 use PHPBot\Process;
+use PHPBot\OS\OperatingSystem;
 
 use React\EventLoop\LoopInterface;
 
 class PointerCommander
 {
     protected $loop;
+    protected $commandFactory;
+    protected $operatingSystem;
 
-    public function __construct(LoopInterface $loop)
+    public function __construct(LoopInterface $loop, OperatingSystem $os)
     {
         $this->loop = $loop;
+        $this->operatingSystem = $os;
+
+        $this->commandFactory = new Command\Factory($this->loop);
     }
 
     public function moveTo($x, $y)
     {
-        $command = "xdotool mousemove --sync {$x} {$y}";
-        return new Process($this->loop, $command);
+        return $this->commandFactory->moveTo($x, $y, $this->operatingSystem);
     }
 
     public function click($mouseButton)
     {
-        $command = "xdotool click {$mouseButton['linux']}";
-        return new Process($this->loop, $command);
+        return $this->commandFactory->click($mouseButton, $this->operatingSystem);
     }
 
     public function holdClick($mouseButton)
     {
-        $command = "xdotool mousedown {$mouseButton['linux']}";
-        return new Process($this->loop, $command);
+        return $this->commandFactory->holdClick($mouseButton, $this->operatingSystem);
     }
     public function releaseClick($mouseButton)
     {
-        $command = "xdotool mouseup {$mouseButton['linux']}";
-        return new Process($this->loop, $command);
+        return $this->commandFactory->releaseClick($mouseButton, $this->operatingSystem);
     }
 }

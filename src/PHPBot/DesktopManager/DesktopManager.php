@@ -5,6 +5,7 @@ namespace PHPBot\DesktopManager;
 use PHPBot\Keyboard\KeyboardCommander;
 use PHPBot\Pointer\PointerCommander;
 use PHPBot\Process;
+use PHPBot\OS\OperatingSystem;
 
 use React\EventLoop\LoopInterface;
 use React\Promise\Deferred;
@@ -14,12 +15,14 @@ class DesktopManager
     protected $loop;
     protected $keyboard;
     protected $pointer;
+    protected $operatingSystem;
 
-    public function __construct(LoopInterface $loop)
+    public function __construct(LoopInterface $loop, OperatingSystem $os)
     {
-        $this->keyboard = new KeyboardCommander($loop);
-        $this->pointer = new PointerCommander($loop);
+        $this->keyboard = new KeyboardCommander($loop, $os);
+        $this->pointer = new PointerCommander($loop, $os);
         $this->loop = $loop;
+        $this->operatingSystem = $os;
     }
 
     public function keyboard()

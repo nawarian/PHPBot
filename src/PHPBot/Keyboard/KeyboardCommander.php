@@ -3,16 +3,19 @@
 namespace PHPBot\Keyboard;
 
 use PHPBot\Process;
+use PHPBot\OS\OperatingSystem;
 
 use React\EventLoop\LoopInterface;
 
 class KeyboardCommander
 {
     protected $loop;
+    protected $operatingSystem;
 
-    public function __construct(LoopInterface $loop)
+    public function __construct(LoopInterface $loop, OperatingSystem $os)
     {
         $this->loop = $loop;
+        $this->operatingSystem = $os;
     }
 
     protected function concatKeys(array $keys)
