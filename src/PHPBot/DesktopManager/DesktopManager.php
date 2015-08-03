@@ -54,7 +54,9 @@ class DesktopManager
 
         // If: the last command, resolve the promise :D
         if (count($commands) == 0) {
-            return $deferred->resolve();
+            return $command->start()->then(function() use ($deferred) {
+                return $deferred->resolve();
+            });
         }
 
         $command->start()->then(function() use ($commands, $deferred) {
