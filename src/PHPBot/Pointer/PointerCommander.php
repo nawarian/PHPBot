@@ -18,7 +18,7 @@ class PointerCommander
         $this->loop = $loop;
         $this->operatingSystem = $os;
 
-        $this->commandFactory = new Command\Factory($this->loop);
+        $this->commandFactory = new CommandFactory($this->loop);
     }
 
     public function moveTo($x, $y)

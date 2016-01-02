@@ -18,7 +18,7 @@ class KeyboardCommander
         $this->loop = $loop;
         $this->operatingSystem = $os;
 
-        $this->commandFactory = new Command\Factory($this->loop);
+        $this->commandFactory = new CommandFactory($this->loop);
     }
 
     protected function concatKeys(array $keys)
@@ -42,9 +42,9 @@ class KeyboardCommander
         return $this->commandFactory->sendkeys($keys, $this->operatingSystem);
     }
 
-    public function type($text, $delay = 12)
+    public function type($text)
     {
-        return $this->commandFactory->type($text, $delay, $this->operatingSystem);
+        return $this->commandFactory->type($text, $this->operatingSystem);
     }
 
     public function holdKey($key)
