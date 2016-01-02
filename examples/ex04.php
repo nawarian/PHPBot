@@ -18,6 +18,7 @@ $dm->createCommandPipeline(
     $dm->pointer()->releaseClick(MouseButtons::LEFT),
     $dm->keyboard()->releaseKey(Keys::CTRL)
 )
+->start()
 ->then(function() {
     echo 'done';
 });

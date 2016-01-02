@@ -16,7 +16,7 @@ $pipeline = $dm->createCommandPipeline(
     $dm->pointer()->click(MouseButtons::LEFT)
 );
 
-$pipeline->then(function() {
+$pipeline->start()->then(function() {
     echo 'All done';
     exit;
 });
