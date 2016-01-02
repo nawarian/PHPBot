@@ -87,10 +87,10 @@ $dm->pointer()->moveTo(0, 0)->start()->then(function() {
 ```php
 $dm = PHPBot\DesktopManager\Factory::create($loop);
 $dm->createCommandPipeline(
-    $dm->keyboard()->type('Soooo cool!'),       // 1
-    $dm->keyboard()->sendKey(Keys::ENTER),      // 2
-    $dm->pointer()->moveTo(200, 200),           // 3
-    $dm->pointer()->click(MouseButtons::LEFT)   // 4
+    $dm->keyboard()->type('Soooo cool!'),         // 1
+    $dm->keyboard()->sendKey(Keys::ENTER()),      // 2
+    $dm->pointer()->moveTo(200, 200),             // 3
+    $dm->pointer()->click(MouseButtons::LEFT())   // 4
 )
 ->start()
 ->then(function() {
