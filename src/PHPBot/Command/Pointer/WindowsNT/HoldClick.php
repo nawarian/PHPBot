@@ -14,7 +14,7 @@ class HoldClick implements CommandInterface
 
     public function __construct($button, LoopInterface $loop)
     {
-        $this->button = $button['windowsnt'];
+        $this->button = $button;
         $this->loop = $loop;
     }
 

@@ -10,7 +10,7 @@ $loop = React\EventLoop\Factory::create();
 $dm = DesktopManagerFactory::create($loop);
 
 $dm ->keyboard()
-    ->sendKey(Keys::ENTER)
+    ->sendKey(Keys::ENTER())
     ->start()
     ->then(function() use ($dm) {
         echo 'enteroooou';

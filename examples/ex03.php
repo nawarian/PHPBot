@@ -11,7 +11,7 @@ $dm = DesktopManagerFactory::create($loop);
 
 $dm->pointer()->moveTo(200, 200)->start()->then(function() use ($dm) {
     $dm->pointer()->moveTo(10, 0)->start()->then(function() use ($dm) {
-        $dm->pointer()->click(MouseButtons::LEFT)->start()->then(function() {
+        $dm->pointer()->click(MouseButtons::LEFT())->start()->then(function() {
             echo 'done';
         });
     });
