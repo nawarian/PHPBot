@@ -37,16 +37,5 @@ class SendKeys implements CommandInterface
         return new ChildProcess($command);
     }
 
-    public function start()
-    {
-        $command = $this->getCommand($this->keys);
-        $deferred = new Deferred();
-        $command->start($this->loop, 0.001);
-
-        $command->on('exit', function () use ($deferred) {
-            $deferred->resolve();
-        });
-
-        return $deferred->promise();
-    }
+    use \PHPBot\Command\Keyboard\Traits\MultipleButtonsStartTrait;
 }

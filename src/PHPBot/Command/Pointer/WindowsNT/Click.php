@@ -5,7 +5,6 @@ namespace PHPBot\Command\Pointer\WindowsNT;
 use PHPBot\Command\CommandInterface;
 
 use React\EventLoop\LoopInterface;
-use React\Promise\Deferred;
 use React\ChildProcess\Process as ChildProcess;
 
 class Click implements CommandInterface
@@ -14,7 +13,7 @@ class Click implements CommandInterface
 
     public function __construct($button, LoopInterface $loop)
     {
-        $this->button = $button;
+        $this->button = $button['windowsnt'];
         $this->loop = $loop;
     }
 
@@ -27,16 +26,5 @@ class Click implements CommandInterface
         return $cmd;
     }
 
-    public function start()
-    {
-        $command = $this->getCommand($this->button['windowsnt']);
-        $deferred = new Deferred();
-        $command->start($this->loop, 0.001);
-
-        $command->on('exit', function () use ($deferred) {
-            $deferred->resolve();
-        });
-
-        return $deferred->promise();
-    }
+    use \PHPBot\Command\Pointer\Traits\MouseClickButtonTrait;
 }

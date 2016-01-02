@@ -5,7 +5,6 @@ namespace PHPBot\Command\Pointer\Linux;
 use PHPBot\Command\CommandInterface;
 
 use React\EventLoop\LoopInterface;
-use React\Promise\Deferred;
 use React\ChildProcess\Process as ChildProcess;
 
 class MoveTo implements CommandInterface
@@ -30,16 +29,5 @@ class MoveTo implements CommandInterface
         return $cmd;
     }
 
-    public function start()
-    {
-        $command = $this->getCommand($this->x, $this->y);
-        $deferred = new Deferred();
-        $command->start($this->loop, 0.001);
-
-        $command->on('exit', function () use ($deferred) {
-            $deferred->resolve();
-        });
-
-        return $deferred->promise();
-    }
+    use \PHPBot\Command\Pointer\Traits\MoveToTrait;
 }

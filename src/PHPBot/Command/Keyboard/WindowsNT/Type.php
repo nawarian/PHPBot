@@ -27,16 +27,5 @@ class Type implements CommandInterface
         return new ChildProcess($command);
     }
 
-    public function start($delay = 12)
-    {
-        $command = $this->getCommand($this->text, $delay);
-        $deferred = new Deferred();
-        $command->start($this->loop, 0.001);
-
-        $command->on('exit', function () use ($deferred) {
-            $deferred->resolve();
-        });
-
-        return $deferred->promise();
-    }
+    use \PHPBot\Command\Keyboard\Traits\TypeTextTrait;
 }

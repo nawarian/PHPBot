@@ -5,7 +5,6 @@ namespace PHPBot\Command\Keyboard\Linux;
 use PHPBot\Command\CommandInterface;
 
 use React\EventLoop\LoopInterface;
-use React\Promise\Deferred;
 use React\ChildProcess\Process as ChildProcess;
 
 class HoldKeys implements CommandInterface
@@ -38,16 +37,5 @@ class HoldKeys implements CommandInterface
         return $cmd;
     }
 
-    public function start()
-    {
-        $command = $this->getCommand($this->keys);
-        $deferred = new Deferred();
-        $command->start($this->loop, 0.001);
-
-        $command->on('exit', function () use ($deferred) {
-            $deferred->resolve();
-        });
-
-        return $deferred->promise();
-    }
+    use \PHPBot\Command\Keyboard\Traits\MultipleButtonsStartTrait;
 }

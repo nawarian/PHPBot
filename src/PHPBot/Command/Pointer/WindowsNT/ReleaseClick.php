@@ -14,7 +14,7 @@ class ReleaseClick implements CommandInterface
 
     public function __construct($button, LoopInterface $loop)
     {
-        $this->button = $button;
+        $this->button = $button['windowsnt'];
         $this->loop = $loop;
     }
 
@@ -27,16 +27,5 @@ class ReleaseClick implements CommandInterface
         return $cmd;
     }
 
-    public function start()
-    {
-        $command = $this->getCommand($this->button['windowsnt']);
-        $deferred = new Deferred();
-        $command->start($this->loop, 0.001);
-
-        $command->on('exit', function () use ($deferred) {
-            $deferred->resolve();
-        });
-
-        return $deferred->promise();
-    }
+    use \PHPBot\Command\Pointer\Traits\MouseClickButtonTrait;
 }
