@@ -2,77 +2,102 @@
 
 namespace PHPBot\Keyboard;
 
-interface Keys
+use PHPBot\OS\Factory as OS;
+
+abstract class Keys
 {
-    const ALT = array(
-        'linux' => 'alt',
-        'windowsnt' => 'alt'
+    private static $os;
+
+    private static function OSObject()
+    {
+        if (!self::$os) {
+            self::$os = OS::createGuessingOS();
+        }
+
+        return self::$os;
+    }
+
+    public static function __callStatic($key, $arguments)
+    {
+        $os = isset($arguments[0]) ? $arguments[0] : self::OSObject();
+
+        $button = self::$$key;
+        return $button[$os->toNamespaceString()];
+    }
+
+    protected static $ALT = array(
+        'Linux' => 'alt',
+        'WindowsNT' => 'alt'
     );
 
-    const CTRL = array(
-        'linux' => 'ctrl',
-        'windowsnt' => 'ctrl'
+    protected static $CTRL = array(
+        'Linux' => 'ctrl',
+        'WindowsNT' => 'ctrl'
     );
 
-    const TAB = array(
-        'linux' => 'Tab',
-        'windowsnt' => 'tab'
+    protected static $TAB = array(
+        'Linux' => 'Tab',
+        'WindowsNT' => 'tab'
     );
 
-    const ENTER = array(
-        'linux' => 'KP_Enter',
-        'windowsnt' => 'enter'
+    protected static $ENTER = array(
+        'Linux' => 'KP_Enter',
+        'WindowsNT' => 'enter'
     );
 
     /**
      * Function keys...
      */
-    const F1 = array(
-        'linux' => 'f1',
-        'windowsnt' => 'f1'
+    protected static $F1 = array(
+        'Linux' => 'f1',
+        'WindowsNT' => 'f1'
     );
-    const F2 = array(
-        'linux' => 'f2',
-        'windowsnt' => 'f2'
+    protected static $F2 = array(
+        'Linux' => 'f2',
+        'WindowsNT' => 'f2'
     );
-    const F3 = array(
-        'linux' => 'f3',
-        'windowsnt' => 'f3'
+    protected static $F3 = array(
+        'Linux' => 'f3',
+        'WindowsNT' => 'f3'
     );
-    const F4 = array(
-        'linux' => 'f4',
-        'windowsnt' => 'f4'
+    protected static $F4 = array(
+        'Linux' => 'f4',
+        'WindowsNT' => 'f4'
     );
-    const F5 = array(
-        'linux' => 'f5',
-        'windowsnt' => 'f5'
+    protected static $F5 = array(
+        'Linux' => 'f5',
+        'WindowsNT' => 'f5'
     );
-    const F6 = array(
-        'linux' => 'f6',
-        'windowsnt' => 'f6'
+    protected static $F6 = array(
+        'Linux' => 'f6',
+        'WindowsNT' => 'f6'
     );
-    const F7 = array(
-        'linux' => 'f7',
-        'windowsnt' => 'f7'
+    protected static $F7 = array(
+        'Linux' => 'f7',
+        'WindowsNT' => 'f7'
     );
-    const F8 = array(
-        'linux' => 'f8',
-        'windowsnt' => 'f8'
+    protected static $F8 = array(
+        'Linux' => 'f8',
+        'WindowsNT' => 'f8'
     );
-    const F9 = array(
-        'linux' => 'f9',
-        'windowsnt' => 'f09'
+    protected static $F9 = array(
+        'Linux' => 'f9',
+        'WindowsNT' => 'f09'
     );
-    const F10 = array(
-        'linux' => 'f10',
-        'windowsnt' => 'f10'
+    protected static $F10 = array(
+        'Linux' => 'f10',
+        'WindowsNT' => 'f10'
     );
-    const F11 = array(
-        'linux' => 'f11',
-        'windowsnt' => 'f11'
+    protected static $F11 = array(
+        'Linux' => 'f11',
+        'WindowsNT' => 'f11'
     );
-    const F12 = array(
-        'linux' => 'f12',
-        'windowsnt' => 'f12'
+    protected static $F12 = array(
+        'Linux' => 'f12',
+        'WindowsNT' => 'f12'
     );
 }
+
+// interface Keys
+// {
+// }

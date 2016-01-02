@@ -21,7 +21,7 @@ class HoldKeys implements CommandInterface
     {
         $keysString = '';
         foreach ($keys as $key) {
-            $keysString .= (reset($keys) == $key) ? $key['linux'] : "+{$key['linux']}";
+            $keysString .= (reset($keys) == $key) ? $key : "+{$key}";
         }
 
         return $keysString;

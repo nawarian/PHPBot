@@ -22,7 +22,7 @@ class SendKeys implements CommandInterface
     {
         $str = '';
         foreach ($keys as $key) {
-            $str .= reset($keys) == $key ? $key['windowsnt'] : " {$key['windowsnt']}";
+            $str .= reset($keys) == $key ? $key : " {$key}";
         }
 
         return $str;

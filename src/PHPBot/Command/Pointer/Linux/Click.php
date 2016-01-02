@@ -13,7 +13,7 @@ class Click implements CommandInterface
 
     public function __construct($button, LoopInterface $loop)
     {
-        $this->button = $button['linux'];
+        $this->button = $button;
         $this->loop = $loop;
     }
 

@@ -11,9 +11,9 @@ $dm = DesktopManagerFactory::create($loop);
 
 $pipeline = $dm->createCommandPipeline(
     $dm->keyboard()->type('gnome-terminal'),
-    $dm->keyboard()->sendKey(Keys::ENTER),
+    $dm->keyboard()->sendKey(Keys::ENTER()),
     $dm->pointer()->moveTo(10, 0),
-    $dm->pointer()->click(MouseButtons::LEFT)
+    $dm->pointer()->click(MouseButtons::LEFT())
 );
 
 $pipeline->start()->then(function() {

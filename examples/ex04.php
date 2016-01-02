@@ -10,13 +10,13 @@ $loop = React\EventLoop\Factory::create();
 $dm = DesktopManagerFactory::create($loop);
 
 $dm->createCommandPipeline(
-    $dm->keyboard()->sendKeys(Keys::ALT, Keys::TAB),
+    $dm->keyboard()->sendKeys(Keys::ALT(), Keys::TAB()),
     $dm->pointer()->moveTo(300, 200),
-    $dm->keyboard()->holdKey(Keys::CTRL),
-    $dm->pointer()->holdClick(MouseButtons::LEFT),
+    $dm->keyboard()->holdKey(Keys::CTRL()),
+    $dm->pointer()->holdClick(MouseButtons::LEFT()),
     $dm->pointer()->moveTo(300, 680),
-    $dm->pointer()->releaseClick(MouseButtons::LEFT),
-    $dm->keyboard()->releaseKey(Keys::CTRL)
+    $dm->pointer()->releaseClick(MouseButtons::LEFT()),
+    $dm->keyboard()->releaseKey(Keys::CTRL())
 )
 ->start()
 ->then(function() {
