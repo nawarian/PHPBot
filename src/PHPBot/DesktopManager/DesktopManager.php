@@ -2,6 +2,7 @@
 
 namespace PHPBot\DesktopManager;
 
+use PHPBot\Command\Util\WaitCommand;
 use PHPBot\Keyboard\KeyboardCommander;
 use PHPBot\Pointer\PointerCommander;
 use PHPBot\Process;
@@ -35,35 +36,16 @@ class DesktopManager
         return $this->pointer;
     }
 
+    public function wait($seconds)
+    {
+        return new WaitCommand($seconds, $this->loop);
+    }
+
     public function createCommandPipeline()
     {
         $commands = func_get_args();
-        foreach ($commands as $command) {
-            $this->assertIsAProcess($command);
-        }
-
-        $deferred = new Deferred();
-        $this->recursivelyAppendPromises($commands, $deferred);
-
-        return $deferred->promise();
+        $CommandPipelineClass = 'PHPBot\Command\CommandPipeline';
+        return (new \ReflectionClass($CommandPipelineClass))
+                ->newInstanceArgs($commands);
     }
-
-    public function recursivelyAppendPromises(array $commands, Deferred $deferred)
-    {
-        $command = array_shift($commands);
-
-        // If: the last command, resolve the promise :D
-        if (count($commands) == 0) {
-            return $command->start()->then(function() use ($deferred) {
-                return $deferred->resolve();
-            });
-        }
-
-        $command->start()->then(function() use ($commands, $deferred) {
-            return $this->recursivelyAppendPromises($commands, $deferred);
-        });
-    }
-
-    private function assertIsAProcess(Process $process)
-    {}
 }

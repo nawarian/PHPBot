@@ -92,6 +92,7 @@ $dm->createCommandPipeline(
     $dm->pointer()->moveTo(200, 200),           // 3
     $dm->pointer()->click(MouseButtons::LEFT)   // 4
 )
+->start()
 ->then(function() {
     // This also returns a Promise, resolved when it all finishes
     echo 'DONE!';
