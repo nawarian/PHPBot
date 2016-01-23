@@ -21,7 +21,7 @@ class CommandPipeline
         array_walk($commands, [$this, 'pushCommand']);
     }
 
-    private function pushCommand(CommandInterface $cmd)
+    public function pushCommand(CommandInterface $cmd)
     {
         $this->commands[] = $cmd;
     }
